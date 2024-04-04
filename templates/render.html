@@ -2,12 +2,24 @@
 <html lang="en">
 <head>
     <style>
+        body {
+          font-family: sans-serif;
+          text-align: center;
+        }
+        hr {
+          opacity: 0.5;
+          border-top: dashed 2px;
+          border-bottom: none;
+        }
         .portrait {width: 8.45in; overflow: hidden}
         .landscape {width: 10.9in; overflow: hidden}
         .halfpage {width: 5.4in}
         .quarterpage {height: 5.4in}
           @media print {
             .controls {
+              display: none;
+            }
+            hr {
               display: none;
             }
           }
@@ -18,8 +30,15 @@
           }
           .controls {
             line-height: 30px;
-            font-family: sans-serif;
-            text-align: center;
+          }
+          #slider {
+            vertical-align: middle;
+          }
+          .button {
+            padding-left: 10px;
+            padding-right: 10px;
+            padding-top: 3px;
+            padding-bottom: 3px;
           }
     </style>
 <meta charset="UTF-8">
@@ -31,12 +50,15 @@
   Pages per sheet:   <select id="pagespersheet">
     <option value="2" selected="selected">2</option>
     <option value="4">4</option>
-  </select>
-  How much to crop each page: <input id="slider" type="range" min="0" max="100" value="0"><br/>
-  After adjusting the above values to your liking, print in <b><span id="orientation">landscape</span></b>. This section will not appear in the printout.
+  </select>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  How much to crop each page: <input id="slider" type="range" min="0" max="100" value="0">
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <input type="button" class="button" onclick="print()" value="Print">
+  <br/>
 </div>
 <div class="landscape">
 {% for image in images %}
+    {% if loop.index0 % 2 == 0 %}<hr class="hr_{{ loop.index0 % 4}}"/>{% endif %}
     <div class="imgwrapper halfpage">
         <img src="data:image/png;base64,{{image}}" class="halfpage">
     </div>
@@ -71,8 +93,6 @@
       style.id = "pageOrientation";
       style.innerHTML = `@page {size: ${orientation}}`;
       document.head.appendChild(style);
-
-      document.getElementById("orientation").innerHTML = orientation;
     }
 
     function setPagesPerSheet(numPages) {
@@ -80,10 +100,16 @@
             setOrientation("landscape");
             replaceClass("portrait", "landscape");
             replaceClass("quarterpage", "halfpage");
+            document.querySelectorAll('.hr_2').forEach(function(el) {
+               el.style.display = '';
+            });
         } else if (numPages == 4) {
             setOrientation("portrait");
             replaceClass("landscape", "portrait");
             replaceClass("halfpage", "quarterpage");
+            document.querySelectorAll('.hr_2').forEach(function(el) {
+               el.style.display = 'none';
+            });
         }
     }
 
