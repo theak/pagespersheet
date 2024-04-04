@@ -5,7 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Upload the PDF to print</title>
 <style>
-    body {font-family: sans-serif}
+    body {font-family: sans-serif; text-align: center}
+
+    #spinner {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #000;
+      animation: spin 2s ease-in-out infinite;
+      -webkit-animation: spin 2s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
+    @-webkit-keyframes spin {
+      to { -webkit-transform: rotate(360deg); }
+    }
 </style>
 </head>
 <body>
@@ -13,11 +31,16 @@
 
 <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="file" id="fileInput">
-    <button type="submit">Upload</button>
 </form>
+
+<div id="loader" style="display:none"><br/><br/>
+    <div id="spinner"></div><br/><br/>
+    Uploading file and generating preview...
+</div>
 
 <script>
     document.getElementById('fileInput').addEventListener('change', function() {
+        document.getElementById('loader').style.display = 'block';
         document.getElementById('uploadForm').submit();
     });
 </script>
