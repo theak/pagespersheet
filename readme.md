@@ -1,14 +1,13 @@
+
 # Pages per sheet: Print PDFs with multiple pages per sheet while maximizing content area
 
 Save paper and maximize the viewable area when printing multiple pages per sheet.
 
-Using the traditional pages per sheet feature in your browser or system print dialog won't get rid of margins in the original file, so you end up with lots of blank space:
-![With blank space](static/img/before.jpg)
-
-Pages per sheet is a handy tool to adjust the zoom level on individual pages before printing, so you end up with something that looks like this instead:
-![Without blank space](static/img/after.jpg)
-
-Setting it up is easy and takes ~5 min to deploy locally on a mac or linux computer.
+**Problem**: Using the traditional *pages per sheet* feature in your browser or print dialog won't get rid of margins in the original file, so you end up with lots of blank space like in this example:
+![With blank space](https://github.com/theak/pagespersheet/raw/main/static/img/before.jpg)
+**Solution**: Pages per sheet is a handy tool to adjust the zoom level on individual pages before printing, so you end up with something that looks like this instead:
+![Without blank space](https://github.com/theak/pagespersheet/raw/main/static/img/after.jpg)
+Setting it up is easy and takes ~5 min to deploy locally on a mac or linux computer. At some point I'd love to deploy a hosted version of this.
 
 # Usage
 
