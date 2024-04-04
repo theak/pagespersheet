@@ -9,9 +9,16 @@ Save paper and maximize the viewable area when printing multiple pages per sheet
 ![Without blank space](https://github.com/theak/pagespersheet/raw/main/static/img/after.jpg)
 Setting it up is easy and takes ~5 min to deploy locally on a mac or linux computer. At some point I'd love to deploy a hosted version of this.
 
-# Usage
+# Option 1: Run as docker image
 
-1. Clone the git repo
+1. Clone the repo: ```git clone https://github.com/theak/pagespersheet```
+2. Run ```docker build -t pagespersheet -f Dockerfile .``` to build the docker container
+3. Run ```docker run -it -p 5000:5000 pagespersheet``` to make sure it works, then ctrl+C to stop it.
+4. Run ```docker run -d -p 5000:5000 --restart unless-stopped pagespersheet```
+
+# Option 2: Run directly
+
+1. Clone the repo: ```git clone https://github.com/theak/pagespersheet```
 2. Install poppler. This is required for PDF handling by the pdf2image python library.
 On a mac:
 ```brew install poppler```
