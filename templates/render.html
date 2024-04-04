@@ -47,7 +47,7 @@
     const images = document.querySelectorAll("img");
 
     slider.addEventListener("input", () => {
-      const scaleValue = 1 + slider.value / 200;  // Normalize slider value to 1-1.5 range
+      const scaleValue = 1 + slider.value / 400;  // Normalize slider value to 1-1.25 range
       images.forEach((image) => {
         image.style.transform = `scale(${scaleValue})`;
       });
