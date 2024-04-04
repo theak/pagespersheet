@@ -5,7 +5,8 @@ Save paper and maximize the viewable area when printing multiple pages per sheet
 
 **Problem**: Using the traditional *pages per sheet* feature in your browser or print dialog won't get rid of margins in the original file, so you end up with lots of blank space like in this example:
 <div><img src="https://github.com/theak/pagespersheet/raw/main/static/img/before.jpg" alt="drawing" width="400"/></div>
-**Solution**: Pages per sheet is a handy tool to adjust the zoom level on individual pages before printing, so you end up with something that looks like this instead:
+
+**Solution**: Pages per sheet is a handy tool to adjust the zoom on individual pages before printing, so you can make the most use out of each page:
 <div><img src="https://github.com/theak/pagespersheet/raw/main/static/img/after.jpg" alt="drawing" width="400"/></div>
 
 # Option 1: Run as docker image (easier)
