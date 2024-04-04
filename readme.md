@@ -1,17 +1,19 @@
-# Save paper and save your eyes. Print multiple pages per sheet with cropped margins
+# Pages per sheet: Print PDFs with multiple pages per sheet while maximizing content area
 
-This is a really simple  tool to print multiple pages per sheet with cropped margins, so you can save paper and maximize the readable area when printing multiple pages per sheet.
+Save paper and maximize the viewable area when printing multiple pages per sheet.
 
-Super handy for printing academic papers, financial reports, or any other documents that you need to read without wasting too much paper.
+Using the traditional pages per sheet feature in your browser or system print dialog won't get rid of margins in the original file, so you end up with lots of blank space:
+![With blank space](static/img/before.jpg)
 
-Unlike the normal pages per sheet feature in your system print dialog, this tool lets you crop the margins of the document that you're printing so you can fit maximal content into a physical piece of paper.
+Pages per sheet is a handy tool to adjust the zoom level on individual pages before printing, so you end up with something that looks like this instead:
+![Without blank space](static/img/after.jpg)
 
-Especially handy for printing PDFs that have built-in margins.
+Setting it up is easy and takes ~5 min to deploy locally on a mac or linux computer.
 
 # Usage
 
 1. Clone the git repo
-2. Install poppler. This is required for PDF handling by the pdf2image python library, which this tool uses. Look up the instructions for your platform. 
+2. Install poppler. This is required for PDF handling by the pdf2image python library.
 On a mac:
 ```brew install poppler```
 On Ubuntu:
