@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .portrait {width: 8.45in; overflow: hidden}
+        .landscape {width: 10.9in; overflow: hidden}
+        .halfpage {width: 5.4in}
+        .quarterpage {height: 5.4in}
+          @media print {
+            .controls {
+              display: none;
+            }
+          }
+          img {width: 100%}
+          .imgwrapper {
+            display: inline-block;
+            overflow: hidden;
+          }
+          .controls {
+            line-height: 30px;
+            font-family: sans-serif;
+            text-align: center;
+          }
+    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to Images</title>
+</head>
+<body>
+<div class="controls landscape">
+  Pages per sheet:   <select id="pagespersheet">
+    <option value="2" selected="selected">2</option>
+    <option value="4">4</option>
+  </select>
+  How much to crop each page: <input id="slider" type="range" min="0" max="100" value="0"><br/>
+  After adjusting the above values to your liking, print in <b><span id="orientation">landscape</span></b>. This section will not appear in the printout.
+</div>
+<div class="landscape">
+{% for image in images %}
+    <div class="imgwrapper halfpage">
+        <img src="data:image/png;base64,{{image}}" class="halfpage">
+    </div>
+{% endfor %}
+</div>
+<script>
+    const slider = document.getElementById("slider");
+    const images = document.querySelectorAll("img");
+
+    slider.addEventListener("input", () => {
+      const scaleValue = 1 + slider.value / 200;  // Normalize slider value to 1-1.5 range
+      images.forEach((image) => {
+        image.style.transform = `scale(${scaleValue})`;
+      });
+    });
+
+    function replaceClass(classA, classB) {
+      // Get all elements with the classA
+      const elements = document.querySelectorAll(`.${classA}`);
+
+      // Loop through each element
+      elements.forEach(element => {
+        // Replace classA with classB using classList.replace
+        element.classList.replace(classA, classB);
+      });
+    }
+    function setOrientation(orientation) {
+      const previousOrientation = document.getElementById("pageOrientation");
+      if (previousOrientation) previousOrientation.remove();
+
+      const style = document.createElement('style');
+      style.id = "pageOrientation";
+      style.innerHTML = `@page {size: ${orientation}}`;
+      document.head.appendChild(style);
+
+      document.getElementById("orientation").innerHTML = orientation;
+    }
+
+    function setPagesPerSheet(numPages) {
+        if (numPages == 2) {
+            setOrientation("landscape");
+            replaceClass("portrait", "landscape");
+            replaceClass("quarterpage", "halfpage");
+        } else if (numPages == 4) {
+            setOrientation("portrait");
+            replaceClass("landscape", "portrait");
+            replaceClass("halfpage", "quarterpage");
+        }
+    }
+
+
+    document.getElementById("pagespersheet").addEventListener("change", (event) => {
+        console.log(event.target.value);
+        setPagesPerSheet(event.target.value);
+    })
+
+    window.addEventListener("load", () => setPagesPerSheet(2), false);
+</script>
+</body>
+</html>
