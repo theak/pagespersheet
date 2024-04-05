@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #FAFAFA
+}
+
+#spinner {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #000;
+  animation: spin 2s ease-in-out infinite;
+  -webkit-animation: spin 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  to { -webkit-transform: rotate(360deg); }
+}
+
+#container {
+    width: 8.5in;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #FFF;
+    border: solid 1px #CCC;
+    padding: 0.2in;
+}

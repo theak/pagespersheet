@@ -1,0 +1,45 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #FFF;
+}
+hr {
+  opacity: 0.5;
+  border-top: dashed 2px;
+  border-bottom: none;
+}
+.center {
+  margin-right: auto;
+  margin-left: auto;
+}
+.portrait {width: 8.45in; overflow: hidden; background-color: #FFF}
+.landscape {width: 10.9in; overflow: hidden; background-color: #FFF}
+.halfpage {width: 5.4in}
+.quarterpage {height: 5.4in}
+
+@media print {
+  .controls {
+    display: none;
+  }
+  hr {
+    display: none;
+  }
+}
+
+img {width: 100%}
+.imgwrapper {
+  display: inline-block;
+  overflow: hidden;
+}
+.controls {
+  line-height: 30px;
+}
+#slider {
+  vertical-align: middle;
+}
+.button {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
