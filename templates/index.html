@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pages Per Sheet</title>
+  <title>MaxPrint</title>
   <link rel="stylesheet" href="/static/css/index.css"/>
 </head>
 <body>
   <div id="container">
-    <h3>Pages per sheet</h3>
-    <p>Print PDFs with multiple pages per sheet and cropped margins to maximize the content area.</p>
+    <h2>MaxPrint</h2>
+    <p>Print PDFs with multiple pages per sheet to remove margins and maximize content.</p>
     <p>To get started, upload a PDF:</p>
     <br />
     <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data">
@@ -23,7 +23,17 @@
       <p><button onclick="cancel()">cancel</button></p>
     </div>
 
-    <script>
+  </div>
+  <br/>
+
+  <div class="info">
+    <h4>What this tool does</h4>
+    <p>The "pages per sheet" feature in your print dialog keeps margins in the original file, so you're stuck with blank space and tiny fonts:</p>
+    <p><img class="drawing" src="/static/img/before.svg" /></p>
+    <p><b>MaxPrint</b> lets you zoom before printing to maximize content on each page:</p>
+    <p><img class="drawing" src="/static/img/after.svg" /></p>
+  </div>
+  <script>
       function preventDefaults(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -51,12 +61,5 @@
         document.getElementById('uploadForm').submit();
       });
     </script>
-  </div>
-
-  <div>
-    <h5>Why does this exist?</h5>
-    <p>This tool lets you zoom pages before printing to maximize the content on each sheet.</p>
-    <p>This way you can fit a lot more readable content on a sheet of paper when printing multiple pages per sheet.</p>
-  </div>
 </body>
 </html>
