@@ -26,7 +26,7 @@ On a mac:
 On Ubuntu:
 ```sudo apt install poppler-utils```
 3. In a virtual env, run ```pip install -r requirements.txt```
-4. Run ```flask --app app run``` to start the local web server
+4. Run ```flask --app app --debug run``` to start the local web server in debug mode
 
 ### Usage
 
