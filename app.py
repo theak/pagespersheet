@@ -34,7 +34,7 @@ def upload():
 
     image_byte_arrays = []
 
-    pil_images = pdf2image.convert_from_bytes(file.read(), fmt='png', size=(800, None), dpi=200)
+    pil_images = pdf2image.convert_from_bytes(file.read(), fmt='png', size=(800, None), dpi=300)
     for image in pil_images:
         img_byte_array = io.BytesIO()
         image.save(img_byte_array, format='PNG')
