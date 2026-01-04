@@ -11,11 +11,19 @@ Save paper and maximize the viewable area when printing multiple pages per sheet
 
 ### Option 1: Run as docker image
 
-1. Clone the repo: ```git clone https://github.com/theak/pagespersheet```
-2. Run ```cd pagespersheet```
-3. Run ```docker build -t pagespersheet -f Dockerfile .``` to build the docker container
-4. Run ```docker run -it -p 5000:5000 pagespersheet``` to make sure everything works, then ctrl+C to stop
-5. Run ```docker run -d -p 5000:5000 --restart unless-stopped pagespersheet```
+```
+docker run -d -p 5000:5000 --restart unless-stopped akshaykannan/pagespersheet
+```
+
+Or with docker compose:
+```yaml
+services:
+  pagespersheet:
+    image: akshaykannan/pagespersheet
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+```
 
 ### Option 2: Run directly
 
