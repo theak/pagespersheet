@@ -14,6 +14,7 @@ hr {
 }
 .portrait {width: 8.45in; overflow: hidden; background-color: #FFF}
 .landscape {width: 10.9in; overflow: hidden; background-color: #FFF}
+.fullpage {width: 8in}
 .halfpage {width: 5.4in}
 .quarterpage {height: 5.4in}
 

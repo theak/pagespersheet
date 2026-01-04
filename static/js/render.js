@@ -20,19 +20,38 @@ function setOrientation(orientation) {
 }
 
 function setPagesPerSheet(numPages) {
-  if (numPages == 2) {
+  if (numPages == 1) {
+    setOrientation("portrait");
+    replaceClass("landscape", "portrait");
+    replaceClass("halfpage", "fullpage");
+    replaceClass("quarterpage", "fullpage");
+    document.querySelectorAll('.hr_2').forEach(function(el) {
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('.hr_0').forEach(function(el) {
+      el.style.display = 'none';
+    });
+  } else if (numPages == 2) {
     setOrientation("landscape");
     replaceClass("portrait", "landscape");
     replaceClass("quarterpage", "halfpage");
+    replaceClass("fullpage", "halfpage");
     document.querySelectorAll('.hr_2').forEach(function(el) {
-     el.style.display = '';
-   });
+      el.style.display = '';
+    });
+    document.querySelectorAll('.hr_0').forEach(function(el) {
+      el.style.display = '';
+    });
   } else if (numPages == 4) {
     setOrientation("portrait");
     replaceClass("landscape", "portrait");
     replaceClass("halfpage", "quarterpage");
+    replaceClass("fullpage", "quarterpage");
     document.querySelectorAll('.hr_2').forEach(function(el) {
-     el.style.display = 'none';
-   });
+      el.style.display = 'none';
+    });
+    document.querySelectorAll('.hr_0').forEach(function(el) {
+      el.style.display = '';
+    });
   }
 }
