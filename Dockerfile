@@ -1,7 +1,7 @@
-FROM python:3
+FROM python:3.13-alpine
 ADD requirements.txt /
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install poppler-utils -y
+RUN apk add --no-cache poppler-utils
 RUN mkdir -p static
 RUN mkdir -p templates
 COPY static/ /static/
