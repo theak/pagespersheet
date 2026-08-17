@@ -1,45 +1,49 @@
-from flask import Flask, render_template, request, send_from_directory
-import pdf2image
-import io
 import os
-
+import io
 from base64 import b64encode
 
-app = Flask(__name__)
+import pdf2image
+import bottle
+from bottle import Bottle, request, response, static_file, template
 
-@app.route("/")
+app = Bottle()
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+bottle.TEMPLATE_PATH.insert(0, os.path.join(BASE_DIR, 'templates'))
+INDEX_HTML = open(os.path.join(BASE_DIR, 'templates', 'index.html')).read()
+
+
+@app.route('/')
 def index():
-    return render_template("index.html")
+    return INDEX_HTML
+
+
+@app.route('/static/<filepath:path>')
+def serve_static(filepath):
+    return static_file(filepath, root=STATIC_DIR)
+
 
 @app.route('/favicon.ico')
 def favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'),
-                          'favicon.ico',mimetype='image/vnd.microsoft.icon')
+    return static_file('favicon.ico', root=STATIC_DIR, mimetype='image/vnd.microsoft.icon')
 
-@app.route("/upload", methods = ['POST'])
+
+@app.route('/upload', method='POST')
 def upload():
-    if 'file' not in request.files:
-        return 'No file part', 400
-    
-    file = request.files['file']
+    f = request.files.get('file')
+    if f is None or not f.raw_filename:
+        response.status = 400
+        return 'No selected file'
 
-    if file.filename == '':
-        return 'No selected file', 400
+    images = []
+    for image in pdf2image.convert_from_bytes(f.file.read(), fmt='png', size=(800, None), dpi=300):
+        buf = io.BytesIO()
+        image.save(buf, format='PNG')
+        images.append(b64encode(buf.getvalue()).decode('utf-8'))
 
-    # Read bytes from the uploaded file
-    #file_bytes = file.read()
+    return template('render.html', images=images)
 
-    # You can now process the file bytes as needed
-    # For example, you can save it to disk or perform other operations
 
-    image_byte_arrays = []
-
-    pil_images = pdf2image.convert_from_bytes(file.read(), fmt='png', size=(800, None), dpi=300)
-    for image in pil_images:
-        img_byte_array = io.BytesIO()
-        image.save(img_byte_array, format='PNG')
-        img_byte_array = img_byte_array.getvalue()
-        image_byte_arrays.append(b64encode(img_byte_array).decode('utf-8'))
-
-    return render_template('render.html', images=image_byte_arrays)
-    #return 'File received and processed successfully', 200
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, server='waitress')
